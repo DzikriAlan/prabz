@@ -1,19 +1,9 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Layout from '@/shared/components/Layout'
-import CommerceView from '@/features/commerce/components/CommerceView'
+import type { GetServerSideProps, NextPage } from 'next'
 
-const CommercePage: NextPage = () => {
-  return (
-    <>
-      <Head>
-        <title>Commerce — prabz</title>
-      </Head>
-      <Layout noPadding>
-        <CommerceView />
-      </Layout>
-    </>
-  )
+const CommerceIndexRedirect: NextPage = () => null
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return { redirect: { destination: '/', permanent: false } }
 }
 
-export default CommercePage
+export default CommerceIndexRedirect
