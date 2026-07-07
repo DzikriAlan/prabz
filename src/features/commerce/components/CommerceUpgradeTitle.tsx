@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const WORDS = ['knolwedge', 'experience', 'lifestyle']
+const WORDS = ['knowledge', 'experience', 'lifestyle']
 const WORD_INTERVAL_MS = 2200
 const LONGEST_WORD_LENGTH = Math.max(...WORDS.map((word) => word.length))
 
