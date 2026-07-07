@@ -5,10 +5,5 @@
       "src": "package.json",
       "use": "@vercel/next"
     }
-  ],
-  "env": {
-    "DATABASE_URL": "@database_url",
-    "JWT_SECRET": "@jwt_secret",
-    "JWT_EXPIRES_IN": "@jwt_expires_in"
-  }
+  ]
 }
