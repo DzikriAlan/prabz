@@ -1,10 +1,10 @@
-# Next Starter
+# prabz
 
 Production-ready template for building modern fullstack web applications with Next.js 14, React 18, TypeScript, Prisma ORM, and PostgreSQL.
 
 ## 🎯 Overview
 
-**Next Starter** is a comprehensive web application template that combines modern frontend with backend capabilities:
+**prabz** is a comprehensive web application template that combines modern frontend with backend capabilities:
 - **Frontend**: Next.js 14 (Pages Router) + React 18 + TypeScript with Tailwind CSS & Shadcn/UI components
 - **Backend**: Built-in API routes for server-side logic and database operations
 - **Database**: Prisma ORM + PostgreSQL for robust data management
@@ -53,7 +53,7 @@ Use this starter for:
 
 ```bash
 git clone <repository-url>
-cd next-starter
+cd prabz
 ```
 
 ### 2. Install Dependencies
@@ -75,7 +75,7 @@ cp .env.example .env.local
 Edit `.env.local` with your values:
 ```env
 # Database
-DATABASE_URL="postgresql://username:password@localhost:5432/next_starter"
+DATABASE_URL="postgresql://username:password@localhost:5432/prabz"
 
 # Authentication
 NEXTAUTH_URL="http://localhost:3000"
