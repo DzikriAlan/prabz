@@ -1,9 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ApiError, handleRouteError, methodNotAllowed, sendSuccess } from '@/shared/lib/apiResponse'
-import { withAuth } from '@/shared/lib/serverAuth'
 import { changeCommerceSessionTitle } from '@/shared/server/commerce/commerceService'
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return methodNotAllowed(res, ['POST'])
 
   try {
@@ -17,5 +16,3 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     handleRouteError(res, error, 'Failed to change commerce session title')
   }
 }
-
-export default withAuth(handler)

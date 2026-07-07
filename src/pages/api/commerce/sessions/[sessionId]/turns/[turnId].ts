@@ -1,9 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ApiError, handleRouteError, methodNotAllowed, sendSuccess } from '@/shared/lib/apiResponse'
-import { withAuth } from '@/shared/lib/serverAuth'
 import { changeCommerceHistoryQuery } from '@/shared/server/commerce/commerceService'
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'PATCH') return methodNotAllowed(res, ['PATCH'])
 
   try {
@@ -17,5 +16,3 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     handleRouteError(res, error, 'Failed to change commerce history query')
   }
 }
-
-export default withAuth(handler)

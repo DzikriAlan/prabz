@@ -2,7 +2,8 @@ import { prisma } from '@/shared/lib/prisma'
 import { ApiError, handlePrismaError } from '@/shared/lib/apiResponse'
 import { getCommerceProductsMany, getSellerByUsername, searchCommerceProducts } from './searchEngine'
 
-export async function fetchCommerceSessionsList(userId: string) {
+export async function fetchCommerceSessionsList(userId: string | undefined) {
+  if (!userId) return []
   try {
     return await prisma.commerceSession.findMany({
       where: { userId },

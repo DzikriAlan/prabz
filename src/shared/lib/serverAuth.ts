@@ -45,3 +45,21 @@ export function withAuth(handler: AuthedHandler) {
     await handler(req, res, user)
   }
 }
+
+type OptionallyAuthedHandler = (req: NextApiRequest, res: NextApiResponse, user: AuthUser | null) => Promise<void> | void
+
+// prabz has no login UI (no way for a visitor to obtain a token), so routes that only
+// personalize/associate data with a user — rather than requiring one to function at all —
+// use this instead of withAuth: a valid Bearer token still resolves to a real user, but a
+// missing/invalid one falls back to anonymous (user: null) rather than a hard 401.
+export function withOptionalAuth(handler: OptionallyAuthedHandler) {
+  return async (req: NextApiRequest, res: NextApiResponse) => {
+    let user: AuthUser | null
+    try {
+      user = verifyAuthToken(req)
+    } catch {
+      user = null
+    }
+    await handler(req, res, user)
+  }
+}
