@@ -38,3 +38,148 @@ enum Priority {
   HIGH
   URGENT
 }
+
+enum ProductGender {
+  PEREMPUAN
+  LAKI_LAKI
+}
+
+enum ProductMarketplace {
+  SHOPEE
+  TOKOPEDIA
+  BLIBLI
+}
+
+enum ProductBadge {
+  BEST_SELLER
+  POPULER
+}
+
+enum ProductTone {
+  PASTEL
+  EARTH_TONE
+  SARIMBIT
+}
+
+enum ProductType {
+  FASHION
+  CONCERT_TICKET
+  EDUCATION
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
+
+enum OrderPaymentMethod {
+  TRANSFER_BANK
+  E_WALLET
+  COD
+}
+
+model User {
+  id               String            @id @default(cuid())
+  name             String?
+  email            String?           @unique
+  commerceSessions CommerceSession[]
+  orders           Order[]
+
+  @@map("users")
+}
+
+model Seller {
+  id               String            @id @default(cuid())
+  username         String            @unique
+  name             String
+  avatarUrl        String?
+  description      String?           @db.Text
+  products         Product[]
+  commerceSessions CommerceSession[]
+  createdAt        DateTime          @default(now())
+
+  @@map("sellers")
+}
+
+model Product {
+  id            String             @id @default(cuid())
+  name          String
+  category      String
+  productType   ProductType
+  gender        ProductGender
+  tones         ProductTone[]
+  price         Int
+  originalPrice Int?
+  rating        Float              @default(0)
+  reviewCount   Int                @default(0)
+  marketplace   ProductMarketplace
+  badge         ProductBadge?
+  imageUrl      String
+  description   String?            @db.Text
+  sellerId      String
+  seller        Seller             @relation(fields: [sellerId], references: [id])
+  orders        Order[]
+  createdAt     DateTime           @default(now())
+
+  @@index([gender])
+  @@index([sellerId])
+  @@index([productType])
+  @@map("products")
+}
+
+model Order {
+  id               String             @id @default(cuid())
+  userId           String?
+  user             User?              @relation(fields: [userId], references: [id], onDelete: SetNull)
+  productId        String
+  product          Product            @relation(fields: [productId], references: [id])
+  quantity         Int                @default(1)
+  totalPrice       Int
+  recipientName    String
+  phoneNumber      String
+  address          String?            @db.Text
+  city             String?
+  postalCode       String?
+  size             String?
+  attendees        Json?
+  paymentMethod    OrderPaymentMethod
+  status           OrderStatus        @default(PENDING)
+  paymentUrl       String?
+  paymentReference String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+
+  @@index([userId])
+  @@index([productId])
+  @@index([paymentReference])
+  @@map("orders")
+}
+
+model CommerceSession {
+  sessionId String            @id @default(cuid())
+  userId    String?
+  user      User?             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sellerId  String?
+  seller    Seller?           @relation(fields: [sellerId], references: [id])
+  title     String?
+  history   CommerceHistory[]
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@index([userId])
+  @@index([sellerId])
+  @@map("commerce_sessions")
+}
+
+model CommerceHistory {
+  id              String          @id @default(cuid())
+  sessionId       String
+  commerceSession CommerceSession @relation(fields: [sessionId], references: [sessionId], onDelete: Cascade)
+  query           String          @db.Text
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([sessionId])
+  @@map("commerce_history")
+}
