@@ -7,12 +7,42 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/features/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/shared/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
   	extend: {
   		fontFamily: {
   			poppins: ['var(--font-poppins)', 'sans-serif'],
   			playfair: ['var(--font-playfair)', 'serif'],
+  			quera: ['var(--font-poppins)', 'system-ui', 'sans-serif'],
+  		},
+  		fontSize: {
+  			"rem-65":  ["0.65rem",  { lineHeight: "1.4" }],
+  			"rem-70":  ["0.70rem",  { lineHeight: "1.4" }],
+  			"rem-75":  ["0.75rem",  { lineHeight: "1.4" }],
+  			"rem-80":  ["0.80rem",  { lineHeight: "1.5" }],
+  			"rem-85":  ["0.85rem",  { lineHeight: "1.5" }],
+  			"rem-90":  ["0.90rem",  { lineHeight: "1.5" }],
+  			"rem-95":  ["0.95rem",  { lineHeight: "1.5" }],
+  			"rem-100": ["1.00rem",  { lineHeight: "1.5" }],
+  			"rem-110": ["1.10rem",  { lineHeight: "1.5" }],
+  			"rem-120": ["1.20rem",  { lineHeight: "1.4" }],
+  			"rem-130": ["1.30rem",  { lineHeight: "1.35" }],
+  			"rem-140": ["1.40rem",  { lineHeight: "1.3" }],
+  			"rem-150": ["1.50rem",  { lineHeight: "1.3" }],
+  			"rem-160": ["1.60rem",  { lineHeight: "1.25" }],
+  			"rem-200": ["2.00rem",  { lineHeight: "1.2" }],
+  		},
+  		keyframes: {
+  			"word-blast": {
+  				"0%":   { opacity: "0", transform: "scale(1.5)", filter: "blur(8px)" },
+  				"55%":  { opacity: "1", transform: "scale(0.94)", filter: "blur(0px)" },
+  				"100%": { opacity: "1", transform: "scale(1)" },
+  			},
+  		},
+  		animation: {
+  			"word-blast": "word-blast 550ms cubic-bezier(0.16, 1, 0.3, 1) both",
   		},
   		colors: {
   			midnight: {
